@@ -43,20 +43,13 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 	// fetch from alltherage
 	$client = new \GuzzleHttp\Client();
 	
-	//$res    = $client->get('http://alltheragefaces.com/api/search/' . $search , ['verify' => false]);
-	//$json   = json_decode( $res->getBody() );
-	
-	$ch = curl_init('http://alltheragefaces.com/api/search/' . $search);
-	echo 'Curl error: ' . curl_error($ch);
+	$res    = $client->get('http://alltheragefaces.com/api/search/' . $search , ['verify' => false, debug => true]);
+	$json   = json_decode( $res->getBody() );
 
-	var_dump( curl_version());
-
-	// phpinfo();
-
-	// if ( $json && is_array( $json ) ) {
-	// 	$img = $json[ array_rand( $json ) ];
-	// 	return $img;
-	// }
+	if ( $json && is_array( $json ) ) {
+		$img = $json[ array_rand( $json ) ];
+		return $img;
+	}
 
 	$app->abort( 200, 'Failed to fetch anything from the API :(' );
 };
