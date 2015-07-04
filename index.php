@@ -43,7 +43,7 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 	// fetch from alltherage
 	$client = new \GuzzleHttp\Client();
 	
-	$res    = $client->get(trim('http://alltheragefaces.com/api/search/' . $search) , 
+	$res    = $client->get('http://alltheragefaces.com/api/search/' . $search , 
 		[
 			'curl' => [
 			        CURLOPT_SSL_VERIFYHOST => false,
