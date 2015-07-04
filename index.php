@@ -43,10 +43,13 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 	// fetch from alltherage
 	$client = new \GuzzleHttp\Client();
 	
-	exit;
-	
 	$res    = $client->get( 'http://alltheragefaces.com/api/search/' . $search , ['verify' => false]);
 	$json   = json_decode( $res->getBody() );
+	
+	$ch = curl_init('http://alltheragefaces.com/api/search/' . $search);
+	echo 'Curl error: ' . curl_error($ch);
+
+	phpinfo();
 
 	if ( $json && is_array( $json ) ) {
 		$img = $json[ array_rand( $json ) ];
@@ -90,8 +93,6 @@ $app->post( '/', function ( \Silex\Application $app ) {
 		] );
 
 		$client  = new \GuzzleHttp\Client();
-		
-		exit;
 		
 		$promise = $client->postAsync( $app['webhooks'][ $token ], [ 'body' => $payload ] );
 		$promise->wait();
