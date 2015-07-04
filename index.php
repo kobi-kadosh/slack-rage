@@ -100,10 +100,12 @@ $app->post( '/', function ( \Silex\Application $app ) {
 			]
 		] );
 
-		$client  = new \GuzzleHttp\Client();
+		// $client  = new \GuzzleHttp\Client();
 		
-		$promise = $client->postAsync( $app['webhooks'][ $token ], [ 'body' => $payload ] );
-		$promise->wait();
+		// $promise = $client->postAsync( $app['webhooks'][ $token ], [ 'body' => $payload ] );
+		// $promise->wait();
+
+		$res = \Requests::post($app['webhooks'][ $token ], [ 'body' => $payload ]);	
 
 		return '';
 	}
