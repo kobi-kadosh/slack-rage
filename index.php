@@ -16,11 +16,23 @@ if ( file_exists( __DIR__ . '/config.php' ) ) {
 
 $app = new \Silex\Application();
 
+// get heroku vars
+$env_token = getenv('SLACK_TOKEN');
+$env_webhook = getenv('SLACK_WEBHOOK');
+
 // slack hooks
 // 1. copy the sample config file to config.php
 // 2. change the sample array so that your slash command token is the key and you incoming webhook is the value
 // 3. add as many as you like
-$app['webhooks'] = isset( $webhooks ) ? $webhooks : [ ];
+
+// heroku mode
+if(isset($env_token) && isset($env_webhook)){
+	$app['webhooks'] = [
+		$env_token => $env_webhook
+	];
+} else {
+	$app['webhooks'] = isset( $webhooks ) ? $webhooks : [ ];
+}
 
 // add fetch service
 $app['fetch_rage'] = function ( \Silex\Application $app ) {
