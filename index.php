@@ -14,6 +14,8 @@ if ( file_exists( __DIR__ . '/config.php' ) ) {
 	require_once __DIR__ . '/config.php';
 }
 
+curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+
 $app = new \Silex\Application();
 
 // get heroku vars
