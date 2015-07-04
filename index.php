@@ -26,7 +26,7 @@ $env_webhook = getenv('SLACK_WEBHOOK');
 // 3. add as many as you like
 
 // heroku mode
-if(isset($env_token) && isset($env_webhook)){
+if(!empty($env_token) && !empty($env_webhook)){
 	$app['webhooks'] = [
 		$env_token => $env_webhook
 	];
