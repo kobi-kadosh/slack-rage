@@ -105,7 +105,7 @@ $app->post( '/', function ( \Silex\Application $app ) {
 		// $promise = $client->postAsync( $app['webhooks'][ $token ], [ 'body' => $payload ] );
 		// $promise->wait();
 
-		$res = \Requests::post($app['webhooks'][ $token ], [ 'body' => $payload ]);	
+		// $res = \Requests::post($app['webhooks'][ $token ], [ 'body' => $payload ]);	
 
 		return '';
 	}
