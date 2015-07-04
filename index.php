@@ -87,6 +87,9 @@ $app->post( '/', function ( \Silex\Application $app ) {
 		] );
 
 		$client  = new \GuzzleHttp\Client();
+		
+		exit;
+		
 		$promise = $client->postAsync( $app['webhooks'][ $token ], [ 'body' => $payload ] );
 		$promise->wait();
 
