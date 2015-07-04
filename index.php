@@ -42,7 +42,7 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 
 	// fetch from alltherage
 	$client = new \GuzzleHttp\Client();
-	$res    = $client->get( 'https://alltheragefaces.com/api/search/' . $search , ['verify' => false]);
+	$res    = $client->get( 'http://alltheragefaces.com/api/search/' . $search , ['verify' => false]);
 	$json   = json_decode( $res->getBody() );
 
 	if ( $json && is_array( $json ) ) {
