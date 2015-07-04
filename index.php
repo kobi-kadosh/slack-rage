@@ -38,7 +38,7 @@ if(!empty($env_token) && !empty($env_webhook)){
 $app['fetch_rage'] = function ( \Silex\Application $app ) {
 
 	$search = $app['request']->get( 'text' );
-	$search = str_replace( ' ', '+', $search );
+	$search = str_replace( ' ', '-', $search );
 
 	// fetch from alltherage
 	$client = new \GuzzleHttp\Client();
