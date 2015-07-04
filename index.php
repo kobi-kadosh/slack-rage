@@ -14,8 +14,6 @@ if ( file_exists( __DIR__ . '/config.php' ) ) {
 	require_once __DIR__ . '/config.php';
 }
 
-curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-
 $app = new \Silex\Application();
 
 // get heroku vars
@@ -44,7 +42,7 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 
 	// fetch from alltherage
 	$client = new \GuzzleHttp\Client();
-	$res    = $client->get( 'https://alltheragefaces.com/api/search/' . $search );
+	$res    = $client->get( 'https://alltheragefaces.com/api/search/' . $search , ['verify' => false]);
 	$json   = json_decode( $res->getBody() );
 
 	if ( $json && is_array( $json ) ) {
