@@ -2,6 +2,6 @@
   "require": {
     "silex/silex": "~1.2",
     "guzzlehttp/guzzle": "~6.0",
-    "rmccue/requests": ">=1.0"
+    "rmccue/requests": "^1.6"
   }
 }

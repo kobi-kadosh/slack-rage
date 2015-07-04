@@ -41,19 +41,23 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 	$search = str_replace( ' ', '-', $search );
 
 	// fetch from alltherage
-	$client = new \GuzzleHttp\Client();
+	// $client = new \GuzzleHttp\Client();
 	
-	$res    = $client->get('http://alltheragefaces.com/api/search/' . $search , 
-		[
-			'curl' => [
-			        CURLOPT_SSL_VERIFYHOST => false,
-			        CURLOPT_VERBOSE => true
-			    ],
-			'verify' => false, 
-			debug => true
-		]
-		);
-	$json   = json_decode( $res->getBody() );
+	// $res    = $client->get('http://alltheragefaces.com/api/search/' . $search , 
+	// 	[
+	// 		'curl' => [
+	// 		        CURLOPT_SSL_VERIFYHOST => false,
+	// 		        CURLOPT_VERBOSE => true
+	// 		    ],
+	// 		'verify' => false, 
+	// 		debug => true
+	// 	]
+	// 	);
+	
+	$res = \Requests::get('http://alltheragefaces.com/api/search/' . $search);	
+	$json   = json_decode( $res->body);
+		
+	// $json   = json_decode( $res->getBody() );
 
 	if ( $json && is_array( $json ) ) {
 		$img = $json[ array_rand( $json ) ];
