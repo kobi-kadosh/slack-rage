@@ -49,6 +49,8 @@ $app['fetch_rage'] = function ( \Silex\Application $app ) {
 	$ch = curl_init('http://alltheragefaces.com/api/search/' . $search);
 	echo 'Curl error: ' . curl_error($ch);
 
+	var_dump( curl_version());
+
 	// phpinfo();
 
 	// if ( $json && is_array( $json ) ) {
