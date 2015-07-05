@@ -73,7 +73,6 @@ $app->get( '/', function ( \Silex\Application $app ) {
 } );
 
 $app->post( '/', function ( \Silex\Application $app ) {
-
 	$img = $app['fetch_rage'];
 
 	// check for slack data
@@ -107,10 +106,21 @@ $app->post( '/', function ( \Silex\Application $app ) {
 
 		// $res = \Requests::post($app['webhooks'][ $token ], [ 'body' => $payload ]);	
 
+		$ch = curl_init($app['webhooks'][ $token ]);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				'Content-Type: application/json',
+				'Content-Length: ' . strlen($payload))
+			);
+ 
+		$res = curl_exec($ch);    
+		
 		return '';
 	}
 
-	return sprintf( '<img src="%s" alt="%s" />', $app->escape( $img->png ), $app->escape( $img->title ) );;
+	return sprintf( '<img src="%s" alt="%s" />', $app->escape( $img->png ), $app->escape( $img->title ) );
 } );
 
 $app->error( function ( \Exception $e, $code ) {
