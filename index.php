@@ -74,12 +74,12 @@ $app->get( '/', function ( \Silex\Application $app ) {
 
 $app->post( '/', function ( \Silex\Application $app ) {
 	$img = $app['fetch_rage'];
-
+echo 1;
 	// check for slack data
 	$token = $app['request']->get( 'token' );
-
+echo $token;
 	if ( $token && isset( $app['webhooks'][ $token ] ) ) {
-
+echo 2;
 		// check if user chat or channel
 		$channel = $app['request']->get( 'channel_name' ) === 'directmessage' ?
 			$app['request']->get( 'channel_id' ) :
@@ -98,14 +98,14 @@ $app->post( '/', function ( \Silex\Application $app ) {
 				]
 			]
 		] );
-
+var_dump($payload);
 		// $client  = new \GuzzleHttp\Client();
 		
 		// $promise = $client->postAsync( $app['webhooks'][ $token ], [ 'body' => $payload ] );
 		// $promise->wait();
 
 		// $res = \Requests::post($app['webhooks'][ $token ], [ 'body' => $payload ]);	
-
+echo 3;
 		$ch = curl_init($app['webhooks'][ $token ]);
 			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -116,7 +116,7 @@ $app->post( '/', function ( \Silex\Application $app ) {
 			);
  
 		$res = curl_exec($ch);    
-		
+	echo 4;	
 		return '';
 	}
 
